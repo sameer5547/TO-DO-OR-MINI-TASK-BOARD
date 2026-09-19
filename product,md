@@ -1,0 +1,199 @@
+# Mini Task Board — Product Plan
+
+## 1. Who is this for?
+
+The Mini Task Board is designed for a single user who wants a simple way to create, organize, and track tasks without the complexity of a large project-management system.
+
+It can be useful for:
+- Students
+- Individual developers
+- Freelancers
+- People managing personal tasks
+- Small personal projects
+
+---
+
+## 2. What problem does it solve?
+
+Users may have tasks spread across notes, messages, or different applications.
+
+The Mini Task Board provides one place to:
+
+- Create tasks
+- Track task status
+- Set priorities
+- Set due dates
+- Search tasks
+- Filter tasks
+- Sort tasks
+- Monitor overall progress
+
+The dashboard also provides a quick overview of how many tasks are To Do, In Progress, and Completed.
+
+---
+
+## 3. Most Important Features
+
+### Task Management
+
+- Create tasks
+- View tasks
+- Edit tasks
+- Delete tasks
+
+### Task Organization
+
+Each task can have:
+
+- Title
+- Description
+- Priority
+- Due date
+- Status
+
+### Search and Filtering
+
+Users can:
+
+- Search by task title
+- Filter by status
+- Filter by priority
+- Combine search and filters
+- Sort tasks by due date
+
+### Dashboard
+
+The dashboard displays:
+
+- Total Tasks
+- To Do
+- In Progress
+- Completed
+
+This allows users to quickly understand their current workload.
+
+### Validation
+
+The application validates:
+
+- Empty titles
+- Invalid priorities
+- Invalid statuses
+- Invalid dates
+- Missing tasks during edit/delete operations
+
+---
+
+## 4. What's NOT Necessary Right Now?
+
+The following features are intentionally outside the scope of Version 1:
+
+- User authentication
+- Multiple user accounts
+- Email notifications
+- Mobile application
+- Real-time collaboration
+- Calendar integration
+- Advanced analytics
+- Complex permissions
+- Team management
+- Cloud synchronization
+
+The goal of Version 1 is to build a reliable and understandable task-management application before adding additional complexity.
+
+---
+
+## 5. What Would I Improve With Another Week?
+
+If another week were available, I would improve the application by:
+
+1. Moving from JSON storage to SQLite.
+2. Adding automated unit and integration tests.
+3. Improving responsive design for mobile devices.
+4. Adding better success and error messages.
+5. Adding a confirmation dialog before important actions.
+6. Improving search and filter usability.
+7. Adding user authentication.
+8. Adding task categories or tags.
+9. Deploying the application online.
+10. Improving accessibility.
+
+---
+
+## 6. What Could Go Wrong?
+
+### User Input
+
+- User leaves the title empty.
+- User enters an invalid date.
+- User submits an invalid priority.
+- User submits an invalid status.
+
+### Task Data
+
+- No tasks exist.
+- A task being edited no longer exists.
+- A task being deleted no longer exists.
+- Task data becomes invalid or corrupted.
+
+### Search and Filters
+
+- Search returns no results.
+- Filters return no results.
+- Multiple filters produce no matching tasks.
+- A task does not have a due date.
+
+### Dashboard
+
+Dashboard counts could become incorrect if task status values are not stored or processed consistently.
+
+The application therefore validates task data and calculates dashboard counts from the stored tasks.
+
+---
+
+## 7. What Breaks at 10,000 Users?
+
+The current JSON-based storage approach is designed for a small application.
+
+At approximately 10,000 users, several problems could occur:
+
+### JSON Storage
+
+A JSON file is not designed for many users making simultaneous changes.
+
+Potential problems include:
+
+- Concurrent write conflicts
+- Data corruption
+- Slow file operations
+- Increasing memory usage
+
+### Searching and Filtering
+
+With a large number of tasks, loading the entire JSON file for every request would become inefficient.
+
+### User Isolation
+
+The current application is designed around a single-user model.
+
+Supporting thousands of users would require:
+
+- User accounts
+- Authentication
+- Authorization
+- Separate user data
+
+### Solution
+
+For a larger system, I would move to a database such as PostgreSQL.
+
+The architecture could become:
+
+```text
+Browser
+   ↓
+Flask Application
+   ↓
+Database Layer
+   ↓
+PostgreSQL
