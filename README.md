@@ -63,7 +63,16 @@ JSON
 PROJECT STRUCTURE:
 TODOLIST|
 |________APP|
-|___________|app.py
+|________|app.py
 |___________|storage.py
 |________templates|
-|__________________dashboard.html
+         |__________________dashboard.html
+         |__________________create_task.html
+         |__________________edit.html
+         |__________________task.html
+|________static
+         |________style.css
+|_________data
+         |_________tasks.json
+|_________README.MD
+|_________requirnments.txt
